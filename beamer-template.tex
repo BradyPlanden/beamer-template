@@ -1,0 +1,182 @@
+%% orignal author: Tim Hosgood: timhosgood@gmail.com %%
+%% BIL & 16:9 modification: Brady Planden %%
+
+\documentclass[aspectratio=169]{beamer} % Updates to 16:9 aspect
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage{charter}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% TikZ libraries
+\usetikzlibrary{arrows,shapes,backgrounds}
+
+% Configuration for listings package
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{green},
+  showstringspaces=false,
+}
+
+
+%% Title slide formatting %%
+
+\pgfdeclareimage[width=\paperwidth]{titlebackground}{images/title-slide-background.png}
+\setbeamerfont{subtitle}{size=\tiny}
+\setbeamertemplate{title page}{
+    \begin{picture}(0,0)
+        \put(-28.5,-163){%
+            \pgfuseimage{titlebackground}
+        }
+        \put(0,-75){%
+            \begin{minipage}[b][4.5cm][t]{0.5\textwidth}
+                \color{white}
+                \usebeamerfont{title}
+                    {\inserttitle\\[0.9cm]}
+                \usebeamerfont{subtitle}
+                    {\insertauthor\par}
+                    {\insertinstitute\\[0.3cm]}
+                    {\insertdate}
+            \end{minipage}
+        }
+    \end{picture}
+}
+
+%% General slide formatting %%
+
+\definecolor{oxfordblue}{RGB}{4,30,66}
+
+\pgfdeclareimage[width=1.0cm]{oxfordlogo}{images/oxford-logo.png}
+\pgfdeclareimage[width=0.9cm]{BIL-logo-light}{images/BIL-logo-light.png}
+
+
+\setbeamertemplate{headline}
+{%
+    \begin{picture}(0,0)
+        \put(414,-40){%
+            \pgfuseimage{oxfordlogo}
+        }
+        \put(20,-45){%
+            \rule{420pt}{0.4pt}
+        }
+    \end{picture}
+}
+
+\setbeamertemplate{frametitle}
+{%
+    \begin{picture}(0,0)
+        \put(-8,-10){%
+            \normalsize\color{oxfordblue}\insertframetitle
+        }
+        \put(-7,-20){%
+            \tiny\color{oxfordblue}\insertframesubtitle
+        }
+    \end{picture}
+}
+
+\setbeamertemplate{footline}
+{%
+    \begin{picture}(0,0)
+        \put(20,30){%
+            \rule{420pt}{0.4pt}
+        }
+        \put(20,10){%
+            \pgfuseimage{BIL-logo-light}
+        }
+        \put(210,14){%
+            \color{oxfordblue}\insertshortdate
+        }
+        % \put(260,14){%
+        %     \color{oxfordblue}\insertshorttitle
+        % }
+        \put(437,14){%
+            \color{oxfordblue}\insertpagenumber
+        }
+    \end{picture}%
+}
+
+
+
+%% Information (author, title, etc.) %%
+
+\title[Title]{Long Title of Talk} % short title for footer
+\author%
+{%
+    \sc{My Name}\\
+      \textit{Guest Lecturer}
+}
+\institute%
+{%
+    \textit{Engineering Science}\\
+    \textit{University of Oxford}
+}
+\date[Short Title]{Long Title, \\ \today} % short date for footer
+
+
+
+%% Content of slides %%
+
+\begin{document}
+    \begin{frame}[plain]
+        \titlepage
+    \end{frame}
+    %
+    \begin{frame}
+        \frametitle{Let's make a list}
+        \framesubtitle{and split it across slides}
+        We can also use  \LaTeX \ formatting commands such as \textbackslash\textbackslash[2ex] \\[2ex]
+        
+        \begin{itemize}
+            \item<1-> Point 1
+            \item<2-> Point 2
+        \end{itemize}
+    \end{frame}
+    %
+    \begin{frame}{Including an image}{and columns}
+        \begin{columns}
+            \begin{column}{0.4\textwidth}
+                Here's an example of including an image.
+                It also shows how to use columns in Beamer.\\[2ex]
+                \begin{center}
+                    And centered text!
+                \end{center}
+            \end{column}
+    
+            \begin{column}{0.45\textwidth}
+                \centering
+                \includegraphics<1>[width=\textwidth]{images/synthetic-voltage.png}
+            \end{column}
+        \end{columns}
+    \end{frame}
+    %
+    \begin{frame}
+        \frametitle{Maths}
+        \centering
+        Maths can be included in the usual way:
+    
+        \[
+        \mathbf{m}^{(g+1)} = \mathbf{m}^{(g)} + c_\text{m}\sum_{i=1}^{\mu} w_{i} \left(\mathbf{x}_{i:\lambda}^{(g+1)} - \mathbf{m}^{(g)}\right)
+        \]
+    \end{frame}
+   %
+    \begin{frame}[fragile]
+        \frametitle{Including code}
+        \framesubtitle{using a block}
+        \begin{block}{}
+            \begin{lstlisting}[language=Python]
+                import numpy as np
+                import matplotlib.pyplot as plt
+                for i in range(0, 10):
+                    print(i)
+            \end{lstlisting}
+        \end{block}
+    \end{frame}
+\end{document}
